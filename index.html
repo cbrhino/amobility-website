@@ -32,7 +32,6 @@
             background: var(--white);
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
             color: white;
@@ -120,7 +119,6 @@
             color: var(--dark-blue);
         }
 
-        /* Main Content */
         .main-content {
             margin-top: 80px;
             min-height: calc(100vh - 80px);
@@ -132,7 +130,6 @@
             padding: 2rem;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
             padding: 4rem 0;
@@ -155,7 +152,6 @@
             margin-right: auto;
         }
 
-        /* Vehicle Grid */
         .vehicle-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -183,9 +179,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: var(--gray-medium);
             position: relative;
+            overflow: hidden;
+        }
+
+        .vehicle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .vehicle-badge {
@@ -198,6 +199,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            z-index: 10;
         }
 
         .vehicle-info {
@@ -231,14 +233,57 @@
             font-weight: 500;
         }
 
-        .vehicle-price {
+        .duration-options {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .duration-btn {
+            flex: 1;
+            min-width: 70px;
+            padding: 0.6rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .duration-btn:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .duration-btn.active {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .duration-btn .months {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .duration-btn .price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-top: 0.15rem;
+        }
+
+        .vehicle-price-display {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 1rem;
+            border-top: 2px solid var(--gray-light);
         }
 
-        .price {
-            font-size: 1.5rem;
+        .current-price {
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--dark-blue);
         }
@@ -248,7 +293,6 @@
             color: var(--gray-medium);
         }
 
-        /* Forms */
         .form-container {
             max-width: 600px;
             margin: 2rem auto;
@@ -270,7 +314,8 @@
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 0.8rem;
             border: 2px solid #E5E7EB;
@@ -280,12 +325,12 @@
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-blue);
         }
 
-        /* Dashboard */
         .dashboard {
             padding: 2rem 0;
         }
@@ -337,33 +382,10 @@
             font-size: 0.9rem;
         }
 
-        /* Hidden sections */
         .hidden {
             display: none;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .vehicle-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
-
-        /* Loading Animation */
         .loading {
             display: inline-block;
             width: 20px;
@@ -413,15 +435,6 @@
             color: #000;
         }
 
-        .success-message {
-            background: var(--success-green);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            text-align: center;
-        }
-
         .vehicle-details {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -441,10 +454,55 @@
             color: var(--dark-blue);
             margin-bottom: 0.5rem;
         }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .modal-content {
+                margin: 2% auto;
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .duration-options {
+                flex-direction: column;
+            }
+
+            .duration-btn {
+                width: 100%;
+            }
+        }
+
+        button:focus,
+        input:focus,
+        select:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <nav class="nav">
             <div class="logo">amobility</div>
@@ -465,122 +523,28 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Home Section -->
         <section id="home" class="hero">
             <div class="container">
                 <h1>Movilidad Sostenible con <span style="color: var(--primary-blue);">amobility</span></h1>
                 <p>Vehículos Toyota y Lexus eléctricos e híbridos enchufables. 100% digital, máxima flexibilidad, todo incluido.</p>
+                
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
                     <a href="#" class="btn btn-primary" onclick="showSection('vehicles')">Ver Vehículos</a>
                     <a href="#" class="btn btn-secondary" onclick="showSection('about')">Más Información</a>
                 </div>
 
-                <div class="vehicle-grid">
-                    <div class="vehicle-card" onclick="openVehicleModal('prius')">
-                        <div class="vehicle-image">
-                            <div class="vehicle-badge">HÍBRIDO</div>
-                            <i class="images/Prius_2025.jpg" style="font-size: 3rem; color: var(--primary-blue);"></i>
-                        </div>
-                        <div class="vehicle-info">
-                            <h3>Toyota Prius</h3>
-                            <p class="vehicle-type">Híbrido Enchufable</p>
-                            <div class="vehicle-features">
-                                <span class="feature-tag">Eco-friendly</span>
-                                <span class="feature-tag">Bajo consumo</span>
-                                <span class="feature-tag">Ciudad</span>
-                            </div>
-                            <div class="vehicle-price">
-                                <div>
-                                    <span class="price">€450</span>
-                                    <span class="price-period">/mes</span>
-                                </div>
-                                <div class="btn btn-primary">Ver Detalles</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-card" onclick="openVehicleModal('rav4')">
-                        <div class="vehicle-image">
-                            <div class="vehicle-badge">HÍBRIDO SUV</div>
-                            <i class="images/Rav4.jpg" style="font-size: 3rem; color: var(--primary-blue);"></i>
-                        </div>
-                        <div class="vehicle-info">
-                            <h3>Toyota RAV4 Hybrid</h3>
-                            <p class="vehicle-type">SUV Híbrido Enchufable</p>
-                            <div class="vehicle-features">
-                                <span class="feature-tag">AWD</span>
-                                <span class="feature-tag">Espacioso</span>
-                                <span class="feature-tag">Familiar</span>
-                            </div>
-                            <div class="vehicle-price">
-                                <div>
-                                    <span class="price">€580</span>
-                                    <span class="price-period">/mes</span>
-                                </div>
-                                <div class="btn btn-primary">Ver Detalles</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-card" onclick="openVehicleModal('ux300e')">
-                        <div class="vehicle-image">
-                            <div class="vehicle-badge">100% ELÉCTRICO</div>
-                            <i class="images/lexus ux300h.jpg" style="font-size: 3rem; color: var(--success-green);"></i>
-                        </div>
-                        <div class="vehicle-info">
-                            <h3>Lexus UX 300e</h3>
-                            <p class="vehicle-type">100% Eléctrico</p>
-                            <div class="vehicle-features">
-                                <span class="feature-tag">Premium</span>
-                                <span class="feature-tag">Cero emisiones</span>
-                                <span class="feature-tag">Luxury</span>
-                            </div>
-                            <div class="vehicle-price">
-                                <div>
-                                    <span class="price">€720</span>
-                                    <span class="price-period">/mes</span>
-                                </div>
-                                <div class="btn btn-primary">Ver Detalles</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-card" onclick="openVehicleModal('nx450h')">
-                        <div class="vehicle-image">
-                            <div class="vehicle-badge">PREMIUM HÍBRIDO</div>
-                            <i class="images/nx450h.jpg" style="font-size: 3rem; color: var(--warning-orange);"></i>
-                        </div>
-                        <div class="vehicle-info">
-                            <h3>Lexus NX 450h+</h3>
-                            <p class="vehicle-type">SUV Premium Híbrido</p>
-                            <div class="vehicle-features">
-                                <span class="feature-tag">Luxury</span>
-                                <span class="feature-tag">Premium</span>
-                                <span class="feature-tag">AWD</span>
-                            </div>
-                            <div class="vehicle-price">
-                                <div>
-                                    <span class="price">€850</span>
-                                    <span class="price-period">/mes</span>
-                                </div>
-                                <div class="btn btn-primary">Ver Detalles</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="vehicle-grid" id="vehicleGrid">
+                    <!-- Vehicles will be rendered by JavaScript -->
                 </div>
             </div>
         </section>
 
-        <!-- Vehicles Section -->
         <section id="vehicles" class="container hidden">
             <h2>Nuestros Vehículos</h2>
             <p>Toda nuestra flota es 100% sostenible con vehículos Toyota y Lexus eléctricos e híbridos enchufables.</p>
-            <!-- Vehicle grid will be populated here -->
         </section>
 
-        <!-- About Section -->
         <section id="about" class="container hidden">
             <h2>¿Por qué amobility?</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
@@ -607,7 +571,6 @@
             </div>
         </section>
 
-        <!-- Login Section -->
         <section id="login" class="container hidden">
             <div class="form-container">
                 <h2>Iniciar Sesión</h2>
@@ -631,7 +594,6 @@
             </div>
         </section>
 
-        <!-- Register Section -->
         <section id="register" class="container hidden">
             <div class="form-container">
                 <h2>Crear Cuenta</h2>
@@ -664,7 +626,6 @@
             </div>
         </section>
 
-        <!-- Dashboard Section -->
         <section id="dashboard" class="container hidden">
             <div class="dashboard">
                 <div class="dashboard-header">
@@ -707,7 +668,6 @@
                     </div>
                 </div>
 
-                <!-- Current Vehicle Info -->
                 <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); margin-top: 2rem;">
                     <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">Mi Vehículo Actual</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
@@ -734,38 +694,32 @@
         </section>
     </main>
 
-    <!-- Vehicle Details Modal -->
     <div id="vehicleModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="vehicleModalContent">
-                <!-- Content will be populated by JavaScript -->
-            </div>
+            <div id="vehicleModalContent"></div>
         </div>
     </div>
 
-    <!-- Service Modal -->
     <div id="serviceModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="serviceModalContent">
-                <!-- Content will be populated by JavaScript -->
-            </div>
+            <div id="serviceModalContent"></div>
         </div>
     </div>
 
     <script>
-        // Global state
         let currentUser = null;
         let isLoggedIn = false;
+        let vehicleDurations = {};
 
-        // Vehicle data
         const vehicles = {
             prius: {
                 name: 'Toyota Prius',
                 type: 'Híbrido Enchufable',
-                price: 450,
+                basePrice: 450,
                 badge: 'HÍBRIDO',
+                image: 'Prius_2025.jpg',
                 features: ['Eco-friendly', 'Bajo consumo', 'Ciudad'],
                 details: {
                     'Potencia': '122 HP',
@@ -780,8 +734,9 @@
             rav4: {
                 name: 'Toyota RAV4 Hybrid',
                 type: 'SUV Híbrido Enchufable',
-                price: 580,
+                basePrice: 580,
                 badge: 'HÍBRIDO SUV',
+                image: 'Rav4.jpg',
                 features: ['AWD', 'Espacioso', 'Familiar'],
                 details: {
                     'Potencia': '306 HP',
@@ -796,8 +751,9 @@
             ux300e: {
                 name: 'Lexus UX 300e',
                 type: '100% Eléctrico',
-                price: 720,
+                basePrice: 720,
                 badge: '100% ELÉCTRICO',
+                image: 'lexus ux300h.jpg',
                 features: ['Premium', 'Cero emisiones', 'Luxury'],
                 details: {
                     'Potencia': '204 HP',
@@ -812,8 +768,9 @@
             nx450h: {
                 name: 'Lexus NX 450h+',
                 type: 'SUV Premium Híbrido',
-                price: 850,
+                basePrice: 850,
                 badge: 'PREMIUM HÍBRIDO',
+                image: 'nx450h.jpg',
                 features: ['Luxury', 'Premium', 'AWD'],
                 details: {
                     'Potencia': '304 HP',
@@ -827,25 +784,76 @@
             }
         };
 
-        // Initialize app
+        function calculatePrice(basePrice, duration) {
+            let multiplier = 1;
+            if (duration === 24) multiplier = 0.95;
+            if (duration === 36) multiplier = 0.85;
+            return Math.round(basePrice * multiplier);
+        }
+
+        function selectVehicleDuration(vehicleId, duration, event) {
+            event.stopPropagation();
+            vehicleDurations[vehicleId] = duration;
+            renderVehicles();
+        }
+
+        function renderVehicles() {
+            const grid = document.getElementById('vehicleGrid');
+            grid.innerHTML = Object.entries(vehicles).map(([id, vehicle]) => {
+                const selectedDuration = vehicleDurations[id] || 12;
+                const currentPrice = calculatePrice(vehicle.basePrice, selectedDuration);
+                
+                return `
+                    <div class="vehicle-card" onclick="openVehicleModal('${id}')">
+                        <div class="vehicle-image">
+                            <div class="vehicle-badge">${vehicle.badge}</div>
+                            <img src="${vehicle.image}" alt="${vehicle.name}" onerror="this.style.display='none'">
+                        </div>
+                        <div class="vehicle-info">
+                            <h3>${vehicle.name}</h3>
+                            <p class="vehicle-type">${vehicle.type}</p>
+                            <div class="vehicle-features">
+                                ${vehicle.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                            </div>
+                            <div class="duration-options">
+                                ${[12, 24, 36].map(months => {
+                                    const price = calculatePrice(vehicle.basePrice, months);
+                                    const isActive = selectedDuration === months;
+                                    return `
+                                        <div class="duration-btn ${isActive ? 'active' : ''}" 
+                                             onclick="selectVehicleDuration('${id}', ${months}, event)">
+                                            <div class="months">${months} meses</div>
+                                            <div class="price">€${price}</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                            <div class="vehicle-price-display">
+                                <div>
+                                    <span class="current-price">€${currentPrice}</span>
+                                    <span class="price-period">/mes</span>
+                                </div>
+                                <div class="btn btn-primary">Ver Detalles</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            Object.keys(vehicles).forEach(id => vehicleDurations[id] = 12);
             checkLoginStatus();
             setupEventListeners();
+            renderVehicles();
         });
 
         function setupEventListeners() {
-            // Login form
             document.getElementById('loginForm').addEventListener('submit', handleLogin);
-            
-            // Register form
             document.getElementById('registerForm').addEventListener('submit', handleRegister);
-            
-            // Modal close buttons
             document.querySelectorAll('.close').forEach(closeBtn => {
                 closeBtn.addEventListener('click', closeModal);
             });
-
-            // Click outside modal to close
             window.addEventListener('click', function(event) {
                 if (event.target.classList.contains('modal')) {
                     closeModal();
@@ -854,51 +862,38 @@
         }
 
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('main > section').forEach(section => {
                 section.classList.add('hidden');
             });
-            
-            // Show selected section
             document.getElementById(sectionId).classList.remove('hidden');
         }
 
         function handleLogin(event) {
             event.preventDefault();
-            
             const submitBtn = event.target.querySelector('button[type="submit"]');
             const loading = document.getElementById('loginLoading');
-            
-            // Show loading
             loading.classList.remove('hidden');
             submitBtn.disabled = true;
             
-            // Simulate API call
             setTimeout(() => {
                 const formData = new FormData(event.target);
                 const email = formData.get('email');
                 const password = formData.get('password');
                 
-                // Demo login - accept any email/password
                 if (email && password) {
                     currentUser = {
                         name: email.split('@')[0],
                         email: email,
                         vehicle: 'prius'
                     };
-                    
                     localStorage.setItem('amobility_user', JSON.stringify(currentUser));
                     isLoggedIn = true;
                     updateUIForLoggedInUser();
                     showSection('dashboard');
-                    
-                    // Show success message
                     showNotification('¡Bienvenido! Has iniciado sesión correctamente.', 'success');
                 } else {
                     showNotification('Por favor, completa todos los campos.', 'error');
                 }
-                
-                // Hide loading
                 loading.classList.add('hidden');
                 submitBtn.disabled = false;
             }, 1500);
@@ -906,15 +901,11 @@
 
         function handleRegister(event) {
             event.preventDefault();
-            
             const submitBtn = event.target.querySelector('button[type="submit"]');
             const loading = document.getElementById('registerLoading');
-            
-            // Show loading
             loading.classList.remove('hidden');
             submitBtn.disabled = true;
             
-            // Simulate API call
             setTimeout(() => {
                 const formData = new FormData(event.target);
                 const fullName = formData.get('fullName');
@@ -926,19 +917,14 @@
                         email: email,
                         vehicle: null
                     };
-                    
                     localStorage.setItem('amobility_user', JSON.stringify(currentUser));
                     isLoggedIn = true;
                     updateUIForLoggedInUser();
                     showSection('dashboard');
-                    
-                    // Show success message
                     showNotification('¡Cuenta creada! Bienvenido a amobility.', 'success');
                 } else {
                     showNotification('Por favor, completa todos los campos.', 'error');
                 }
-                
-                // Hide loading
                 loading.classList.add('hidden');
                 submitBtn.disabled = false;
             }, 2000);
@@ -955,16 +941,11 @@
 
         function updateUIForLoggedInUser() {
             if (isLoggedIn && currentUser) {
-                // Hide login/register buttons
                 document.getElementById('loginBtn').classList.add('hidden');
                 document.getElementById('registerBtn').classList.add('hidden');
-                
-                // Show user info
                 document.getElementById('userInfo').classList.remove('hidden');
                 document.getElementById('userName').textContent = currentUser.name;
                 document.getElementById('dashboardUserName').textContent = currentUser.name;
-                
-                // Update current vehicle if user has one
                 if (currentUser.vehicle) {
                     const vehicle = vehicles[currentUser.vehicle];
                     document.getElementById('currentVehicle').textContent = vehicle.name;
@@ -976,23 +957,19 @@
             localStorage.removeItem('amobility_user');
             currentUser = null;
             isLoggedIn = false;
-            
-            // Show login/register buttons
             document.getElementById('loginBtn').classList.remove('hidden');
             document.getElementById('registerBtn').classList.remove('hidden');
-            
-            // Hide user info
             document.getElementById('userInfo').classList.add('hidden');
-            
-            // Go to home
             showSection('home');
-            
             showNotification('Has cerrado sesión correctamente.', 'success');
         }
 
         function openVehicleModal(vehicleId) {
             const vehicle = vehicles[vehicleId];
             if (!vehicle) return;
+            
+            const selectedDuration = vehicleDurations[vehicleId] || 12;
+            const currentPrice = calculatePrice(vehicle.basePrice, selectedDuration);
             
             const modal = document.getElementById('vehicleModal');
             const content = document.getElementById('vehicleModalContent');
@@ -1021,10 +998,10 @@
                 
                 <div style="text-align: center; margin-top: 2rem;">
                     <div style="font-size: 2rem; font-weight: bold; color: var(--dark-blue); margin-bottom: 1rem;">
-                        €${vehicle.price}/mes
+                        €${currentPrice}/mes
                     </div>
                     <p style="color: var(--gray-medium); margin-bottom: 2rem;">
-                        Todo incluido: seguro, mantenimiento, ITV y asistencia 24h
+                        Contrato de ${selectedDuration} meses · Todo incluido: seguro, mantenimiento, ITV y asistencia 24h
                     </p>
                     
                     ${isLoggedIn ? 
@@ -1050,10 +1027,7 @@
             const vehicle = vehicles[vehicleId];
             currentUser.vehicle = vehicleId;
             localStorage.setItem('amobility_user', JSON.stringify(currentUser));
-            
-            // Update current vehicle display
             document.getElementById('currentVehicle').textContent = vehicle.name;
-            
             closeModal();
             showSection('dashboard');
             showNotification(`¡Perfecto! Has seleccionado el ${vehicle.name}. Te contactaremos pronto.`, 'success');
@@ -1077,26 +1051,12 @@
                             <i class="fas fa-car" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
                             <h3>${currentUser.vehicle ? vehicles[currentUser.vehicle].name : 'Sin vehículo asignado'}</h3>
                         </div>
-                        
                         <div class="vehicle-details">
-                            <div class="detail-item">
-                                <strong>Estado</strong>
-                                Activo
-                            </div>
-                            <div class="detail-item">
-                                <strong>Kilometraje</strong>
-                                2.450 km
-                            </div>
-                            <div class="detail-item">
-                                <strong>Próxima Revisión</strong>
-                                En 5.550 km
-                            </div>
-                            <div class="detail-item">
-                                <strong>Seguro</strong>
-                                Todo Riesgo Activo
-                            </div>
+                            <div class="detail-item"><strong>Estado</strong>Activo</div>
+                            <div class="detail-item"><strong>Kilometraje</strong>2.450 km</div>
+                            <div class="detail-item"><strong>Próxima Revisión</strong>En 5.550 km</div>
+                            <div class="detail-item"><strong>Seguro</strong>Todo Riesgo Activo</div>
                         </div>
-                        
                         <div style="margin-top: 2rem;">
                             <h4 style="margin-bottom: 1rem; color: var(--dark-blue);">Documentos</h4>
                             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -1122,12 +1082,10 @@
                             <h3>Asistencia en Carretera 24/7</h3>
                             <p style="color: var(--gray-medium);">Estamos aquí para ayudarte cuando lo necesites</p>
                         </div>
-                        
                         <div style="background: var(--light-blue); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; text-align: center;">
                             <h2 style="color: var(--primary-blue); margin-bottom: 0.5rem;">900 123 456</h2>
                             <p><strong>Teléfono de Emergencias 24h</strong></p>
                         </div>
-                        
                         <h4 style="margin-bottom: 1rem; color: var(--dark-blue);">Servicios Incluidos:</h4>
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Grúa y remolque</li>
@@ -1136,7 +1094,6 @@
                             <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Gastos de hotel</li>
                             <li style="padding: 0.5rem 0;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Repatriación de pasajeros</li>
                         </ul>
-                        
                         <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;" onclick="requestAssistance()">
                             <i class="fas fa-phone"></i> Solicitar Asistencia Ahora
                         </button>
@@ -1150,11 +1107,10 @@
                             <i class="fas fa-wrench" style="font-size: 3rem; color: var(--warning-orange); margin-bottom: 1rem;"></i>
                             <h3>Reservar Mantenimiento</h3>
                         </div>
-                        
                         <div class="form-container" style="box-shadow: none; padding: 0;">
                             <div class="form-group">
                                 <label>Tipo de Servicio</label>
-                                <select class="form-control">
+                                <select>
                                     <option>Revisión Programada</option>
                                     <option>Cambio de Aceite</option>
                                     <option>Revisión de Frenos</option>
@@ -1162,12 +1118,10 @@
                                     <option>Otro</option>
                                 </select>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Fecha Preferida</label>
                                 <input type="date" min="${new Date().toISOString().split('T')[0]}">
                             </div>
-                            
                             <div class="form-group">
                                 <label>Hora Preferida</label>
                                 <select>
@@ -1178,7 +1132,6 @@
                                     <option>16:00 - 17:00</option>
                                 </select>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Taller Preferido</label>
                                 <select>
@@ -1188,12 +1141,10 @@
                                     <option>Toyota Castellón</option>
                                 </select>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Comentarios Adicionales</label>
                                 <textarea rows="3" placeholder="Describe cualquier problema o solicitud especial..."></textarea>
                             </div>
-                            
                             <button class="btn btn-primary" style="width: 100%;" onclick="bookMaintenance()">
                                 <i class="fas fa-calendar-check"></i> Reservar Cita
                             </button>
@@ -1209,15 +1160,12 @@
                             <h3>Cambio de Vehículo</h3>
                             <p style="color: var(--gray-medium);">¿Necesitas un vehículo diferente? Te ayudamos a encontrar el perfecto para ti.</p>
                         </div>
-                        
                         <div style="background: var(--light-blue); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
                             <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Vehículo Actual</h4>
                             <p><strong>${currentUser.vehicle ? vehicles[currentUser.vehicle].name : 'Sin vehículo asignado'}</strong></p>
-                            <p style="color: var(--gray-medium); font-size: 0.9rem;">Cuota actual: €${currentUser.vehicle ? vehicles[currentUser.vehicle].price : 0}/mes</p>
+                            <p style="color: var(--gray-medium); font-size: 0.9rem;">Cuota actual: €${currentUser.vehicle ? vehicles[currentUser.vehicle].basePrice : 0}/mes</p>
                         </div>
-                        
                         <h4 style="margin-bottom: 1rem; color: var(--dark-blue);">Vehículos Disponibles:</h4>
-                        
                         <div style="display: flex; flex-direction: column; gap: 1rem;">
                             ${Object.entries(vehicles).map(([id, vehicle]) => `
                                 <div style="border: 2px solid ${currentUser.vehicle === id ? 'var(--primary-blue)' : '#eee'}; border-radius: 12px; padding: 1rem; cursor: pointer;" onclick="selectNewVehicle('${id}')">
@@ -1227,14 +1175,13 @@
                                             <p style="color: var(--gray-medium); font-size: 0.9rem; margin-bottom: 0;">${vehicle.type}</p>
                                         </div>
                                         <div style="text-align: right;">
-                                            <div style="font-weight: bold; color: var(--dark-blue);">€${vehicle.price}/mes</div>
+                                            <div style="font-weight: bold; color: var(--dark-blue);">€${vehicle.basePrice}/mes</div>
                                             ${currentUser.vehicle === id ? '<div style="color: var(--primary-blue); font-size: 0.8rem;">ACTUAL</div>' : ''}
                                         </div>
                                     </div>
                                 </div>
                             `).join('')}
                         </div>
-                        
                         <div style="margin-top: 2rem; padding: 1rem; background: var(--gray-light); border-radius: 8px;">
                             <p style="font-size: 0.9rem; margin: 0;"><strong>Nota:</strong> Los cambios de vehículo están sujetos a disponibilidad y pueden tener costos adicionales según el modelo seleccionado.</p>
                         </div>
@@ -1248,46 +1195,28 @@
                             <i class="fas fa-credit-card" style="font-size: 3rem; color: var(--success-green); margin-bottom: 1rem;"></i>
                             <h3>Historial de Pagos</h3>
                         </div>
-                        
                         <div class="vehicle-details" style="margin-bottom: 2rem;">
-                            <div class="detail-item">
-                                <strong>Próximo Pago</strong>
-                                15 Oct 2025
-                            </div>
-                            <div class="detail-item">
-                                <strong>Importe</strong>
-                                €${currentUser.vehicle ? vehicles[currentUser.vehicle].price : 450}
-                            </div>
-                            <div class="detail-item">
-                                <strong>Método de Pago</strong>
-                                SEPA Direct Debit
-                            </div>
-                            <div class="detail-item">
-                                <strong>Estado</strong>
-                                Al Día
-                            </div>
+                            <div class="detail-item"><strong>Próximo Pago</strong>15 Oct 2025</div>
+                            <div class="detail-item"><strong>Importe</strong>€${currentUser.vehicle ? vehicles[currentUser.vehicle].basePrice : 450}</div>
+                            <div class="detail-item"><strong>Método de Pago</strong>SEPA Direct Debit</div>
+                            <div class="detail-item"><strong>Estado</strong>Al Día</div>
                         </div>
-                        
                         <h4 style="margin-bottom: 1rem; color: var(--dark-blue);">Historial de Pagos</h4>
-                        
                         <div style="background: white; border-radius: 8px; overflow: hidden; border: 1px solid #eee;">
-                            <div style="background: var(--gray-light); padding: 1rem; border-bottom: 1px solid #eee; font-weight: 600;">
-                                Últimos Pagos
-                            </div>
+                            <div style="background: var(--gray-light); padding: 1rem; border-bottom: 1px solid #eee; font-weight: 600;">Últimos Pagos</div>
                             <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
                                 <span>Sep 2025</span>
-                                <span style="color: var(--success-green); font-weight: 600;">€${currentUser.vehicle ? vehicles[currentUser.vehicle].price : 450} ✓</span>
+                                <span style="color: var(--success-green); font-weight: 600;">€${currentUser.vehicle ? vehicles[currentUser.vehicle].basePrice : 450} ✓</span>
                             </div>
                             <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
                                 <span>Ago 2025</span>
-                                <span style="color: var(--success-green); font-weight: 600;">€${currentUser.vehicle ? vehicles[currentUser.vehicle].price : 450} ✓</span>
+                                <span style="color: var(--success-green); font-weight: 600;">€${currentUser.vehicle ? vehicles[currentUser.vehicle].basePrice : 450} ✓</span>
                             </div>
                             <div style="padding: 1rem; display: flex; justify-content: space-between;">
                                 <span>Jul 2025</span>
-                                <span style="color: var(--success-green); font-weight: 600;">€${currentUser.vehicle ? vehicles[currentUser.vehicle].price : 450} ✓</span>
+                                <span style="color: var(--success-green); font-weight: 600;">€${currentUser.vehicle ? vehicles[currentUser.vehicle].basePrice : 450} ✓</span>
                             </div>
                         </div>
-                        
                         <div style="display: flex; gap: 1rem; margin-top: 2rem;">
                             <button class="btn btn-primary" style="flex: 1;" onclick="downloadInvoice()">
                                 <i class="fas fa-download"></i> Descargar Factura
@@ -1306,38 +1235,31 @@
                             <i class="fas fa-user" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
                             <h3>Datos Personales</h3>
                         </div>
-                        
                         <div class="form-container" style="box-shadow: none; padding: 0;">
                             <div class="form-group">
                                 <label>Nombre Completo</label>
                                 <input type="text" value="${currentUser.name}" readonly>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" value="${currentUser.email}" readonly>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Teléfono</label>
                                 <input type="tel" value="+34 612 345 678" readonly>
                             </div>
-                            
                             <div class="form-group">
                                 <label>Dirección</label>
                                 <input type="text" value="Calle Example, 123, Valencia" readonly>
                             </div>
-                            
                             <div class="form-group">
                                 <label>DNI/NIE</label>
                                 <input type="text" value="12345678X" readonly>
                             </div>
-                            
                             <button class="btn btn-primary" style="width: 100%;" onclick="editProfile()">
                                 <i class="fas fa-edit"></i> Editar Perfil
                             </button>
                         </div>
-                        
                         <div style="margin-top: 2rem; padding: 1.5rem; background: var(--light-blue); border-radius: 12px;">
                             <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Configuración de Privacidad</h4>
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -1392,27 +1314,17 @@
                 animation: slideIn 0.3s ease-out;
                 background: ${type === 'success' ? 'var(--success-green)' : type === 'error' ? '#ef4444' : 'var(--primary-blue)'};
             `;
-            
             notification.textContent = message;
             document.body.appendChild(notification);
-            
-            // Add slide-in animation
             const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
+            style.textContent = `@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
             document.head.appendChild(style);
-            
             setTimeout(() => {
                 notification.remove();
                 style.remove();
             }, 4000);
         }
 
-        // Service functions
         function requestAssistance() {
             showNotification('Solicitud de asistencia enviada. Te contactaremos en 5 minutos.', 'success');
             closeModal();
@@ -1425,10 +1337,8 @@
 
         function selectNewVehicle(vehicleId) {
             if (vehicleId === currentUser.vehicle) return;
-            
             const vehicle = vehicles[vehicleId];
             const currentVehicle = vehicles[currentUser.vehicle];
-            
             let message = `Solicitud de cambio enviada: ${currentVehicle ? currentVehicle.name : 'Vehículo actual'} → ${vehicle.name}`;
             showNotification(message, 'success');
             closeModal();
@@ -1446,102 +1356,5 @@
             showNotification('Función de edición disponible próximamente.', 'info');
         }
     </script>
-    <style>
-        /* Additional responsive styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .nav {
-                padding: 0 1rem;
-            }
-            
-            .logo {
-                font-size: 1.5rem;
-            }
-            
-            .user-menu {
-                gap: 0.5rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .vehicle-card:hover {
-                transform: none;
-            }
-            
-            .dashboard-card:hover {
-                transform: none;
-            }
-            
-            .modal-content {
-                margin: 2% auto;
-                width: 95%;
-                padding: 1rem;
-            }
-            
-            .vehicle-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .dashboard-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero div[style*="display: flex"] {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-
-        /* Smooth transitions */
-        * {
-            transition: all 0.3s ease;
-        }
-
-        /* Focus states for accessibility */
-        button:focus,
-        input:focus,
-        select:focus {
-            outline: 2px solid var(--primary-blue);
-            outline-offset: 2px;
-        }
-
-        /* Loading states */
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-blue);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--dark-blue);
-        }
-    </style>
 </body>
 </html>
