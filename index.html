@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>amobility - Movilidad Sostenible</title>
+    <title>Amobility - Movilidad Sostenible</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -11,20 +11,18 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
-            --primary-blue: #4A90E2;
-            --accent-blue: #5BA0F2;
-            --dark-blue: #2C5282;
-            --light-blue: #E6F3FF;
-            --success-green: #10B981;
+            --primary-blue: #5B9BD5;     /* Abanca's lighter blue */
+            --accent-blue: #083f79;      /* Lighter accent */
+            --dark-blue: #2e5c8a;        /* Darker Abanca blue */
+            --light-blue: #b7defe;       /* Very light blue background */
+            --success-green: #10B981;    /* Keep green for CTA */
             --warning-orange: #F59E0B;
             --white: #FFFFFF;
             --gray-light: #F8F9FA;
             --gray-medium: #6C757D;
-            --gray-dark: #343A40;
+            --gray-dark: #2D3436;        /* Darker gray for better contrast */
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
@@ -505,7 +503,7 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="logo">amobility</div>
+            <div class="logo">Amobility</div>
             <ul class="nav-links">
                 <li><a href="#" onclick="showSection('home')">Inicio</a></li>
                 <li><a href="#" onclick="showSection('vehicles')">Vehículos</a></li>
@@ -526,7 +524,7 @@
     <main class="main-content">
         <section id="home" class="hero">
             <div class="container">
-                <h1>Movilidad Sostenible con <span style="color: var(--primary-blue);">amobility</span></h1>
+                <h1>Movilidad Sostenible con <span style="color: var(--primary-blue);">Amobility</span></h1>
                 <p>Vehículos Toyota y Lexus eléctricos e híbridos enchufables. 100% digital, máxima flexibilidad, todo incluido.</p>
                 
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
@@ -546,7 +544,7 @@
         </section>
 
         <section id="about" class="container hidden">
-            <h2>¿Por qué amobility?</h2>
+            <h2>¿Por qué Amobility?</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
                 <div class="dashboard-card">
                     <i class="fas fa-leaf"></i>
@@ -921,7 +919,7 @@
                     isLoggedIn = true;
                     updateUIForLoggedInUser();
                     showSection('dashboard');
-                    showNotification('¡Cuenta creada! Bienvenido a amobility.', 'success');
+                    showNotification('¡Cuenta creada! Bienvenido a Amobility.', 'success');
                 } else {
                     showNotification('Por favor, completa todos los campos.', 'error');
                 }
