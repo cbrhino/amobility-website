@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>amobility - Movilidad Sostenible</title>
+    <title>aMobility - Movilidad Sostenible</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -505,7 +505,7 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="logo">amobility</div>
+            <div class="logo">aMobility</div>
             <ul class="nav-links">
                 <li><a href="#" onclick="showSection('home')">Inicio</a></li>
                 <li><a href="#" onclick="showSection('vehicles')">Vehículos</a></li>
@@ -526,7 +526,7 @@
     <main class="main-content">
         <section id="home" class="hero">
             <div class="container">
-                <h1>Movilidad Sostenible con <span style="color: var(--primary-blue);">amobility</span></h1>
+                <h1>Movilidad Sostenible con <span style="color: var(--primary-blue);">aMobility</span></h1>
                 <p>Vehículos Toyota y Lexus eléctricos e híbridos enchufables. 100% digital, máxima flexibilidad, todo incluido.</p>
                 
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
@@ -546,7 +546,7 @@
         </section>
 
         <section id="about" class="container hidden">
-            <h2>¿Por qué amobility?</h2>
+            <h2>¿Por qué aMobility?</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
                 <div class="dashboard-card">
                     <i class="fas fa-leaf"></i>
@@ -719,7 +719,7 @@
                 type: 'Híbrido Enchufable',
                 basePrice: 450,
                 badge: 'HÍBRIDO',
-                image: 'Prius_2025.jpg',
+                image: 'images/Prius_2025.jpg',
                 features: ['Eco-friendly', 'Bajo consumo', 'Ciudad'],
                 details: {
                     'Potencia': '122 HP',
@@ -736,7 +736,7 @@
                 type: 'SUV Híbrido Enchufable',
                 basePrice: 580,
                 badge: 'HÍBRIDO SUV',
-                image: 'Rav4.jpg',
+                image: 'images/Rav4.jpg',
                 features: ['AWD', 'Espacioso', 'Familiar'],
                 details: {
                     'Potencia': '306 HP',
@@ -753,7 +753,7 @@
                 type: '100% Eléctrico',
                 basePrice: 720,
                 badge: '100% ELÉCTRICO',
-                image: 'lexus ux300h.jpg',
+                image: 'images/lexus ux300h.jpg',
                 features: ['Premium', 'Cero emisiones', 'Luxury'],
                 details: {
                     'Potencia': '204 HP',
@@ -770,7 +770,7 @@
                 type: 'SUV Premium Híbrido',
                 basePrice: 850,
                 badge: 'PREMIUM HÍBRIDO',
-                image: 'nx450h.jpg',
+                image: 'images/nx450h.jpg',
                 features: ['Luxury', 'Premium', 'AWD'],
                 details: {
                     'Potencia': '304 HP',
@@ -921,7 +921,7 @@
                     isLoggedIn = true;
                     updateUIForLoggedInUser();
                     showSection('dashboard');
-                    showNotification('¡Cuenta creada! Bienvenido a amobility.', 'success');
+                    showNotification('¡Cuenta creada! Bienvenido a aMobility.', 'success');
                 } else {
                     showNotification('Por favor, completa todos los campos.', 'error');
                 }
